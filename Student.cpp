@@ -29,6 +29,5 @@ bool Student::matchByName(const std::string& searchName) const {
     std::string fullNameLower = getFullName();
     std::string searchLower = searchName;
     
-    // Простое сравнение - в реальном проекте лучше приводить к нижнему регистру
     return fullNameLower.find(searchName) != std::string::npos;
 }
