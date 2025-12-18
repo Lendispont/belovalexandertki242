@@ -14,12 +14,8 @@ namespace miit::algebra
     public:
         Exercise(size_t size, std::unique_ptr<Generator> gen);
         virtual ~Exercise() = default;
-        
         void fill_matrix();
         Matrix<int> get_matrix() const;
-        
-        virtual Matrix<int> Task1() = 0;
-        virtual Matrix<int> Task2() = 0;
-        virtual Matrix<int> Task3(const Matrix<int>& D) = 0;
+        virtual void execute() = 0;
     };
 }
