@@ -24,4 +24,4 @@ public:
     void addGroup(const std::shared_ptr<Group>& group);
     void removeGroup(const std::shared_ptr<Group>& group);
     bool teachesInGroup(const std::shared_ptr<Group>& group) const;
-};
+}
