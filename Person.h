@@ -20,4 +20,4 @@ public:
     std::string getFirstName() const;
     std::string getLastName() const;
     std::string getPatronymic() const;
-};
+}
