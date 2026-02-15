@@ -24,4 +24,4 @@ public:
 
     bool matchByRecordBook(const std::string& recordBook) const;
     bool matchByName(const std::string& searchName) const;
-};
+}
