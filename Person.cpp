@@ -1,16 +1,18 @@
 #include "Person.h"
 
-Person::Person(const std::string& firstName, const std::string& lastName, 
+Person::Person(int id, const std::string& firstName, const std::string& lastName,
                const std::string& patronymic)
-    : firstName(firstName), lastName(lastName), patronymic(patronymic) {}
+    : id(id), firstName(firstName), lastName(lastName), patronymic(patronymic) {}
 
 std::string Person::getInfo() const {
-    return getFullName();
+    return getFullName() + " (ID: " + std::to_string(id) + ")";
 }
 
 std::string Person::getType() const {
     return "Person";
 }
+
+int Person::getId() const { return id; }
 
 std::string Person::getFullName() const {
     if (patronymic.empty())
