@@ -1,16 +1,22 @@
 #include "Student.h"
+#include "Group.h"
 
-Student::Student(const std::string& firstName, const std::string& lastName,
+Student::Student(int id, const std::string& firstName, const std::string& lastName,
                  const std::string& patronymic, const std::string& recordBookNumber,
-                 const std::string& groupName, const std::string& specialization)
-    : Person(firstName, lastName, patronymic), 
+                 const std::shared_ptr<Group>& group, const std::string& specialization)
+    : Person(id, firstName, lastName, patronymic), 
       recordBookNumber(recordBookNumber),
-      groupName(groupName),
+      group(group),
       specialization(specialization) {}
 
 std::string Student::getInfo() const {
-    return getFullName() + " | Зачетка: " + recordBookNumber + 
-           " | Группа: " + groupName + " | Специальность: " + specialization;
+    std::string info = getFullName() + " (ID: " + std::to_string(getId()) + ")";
+    info += " | Зачетка: " + recordBookNumber;
+    if (group) {
+        info += " | Группа: " + group->getName();
+    }
+    info += " | Специальность: " + specialization;
+    return info;
 }
 
 std::string Student::getType() const {
@@ -18,7 +24,7 @@ std::string Student::getType() const {
 }
 
 std::string Student::getRecordBookNumber() const { return recordBookNumber; }
-std::string Student::getGroupName() const { return groupName; }
+std::shared_ptr<Group> Student::getGroup() const { return group; }
 std::string Student::getSpecialization() const { return specialization; }
 
 bool Student::matchByRecordBook(const std::string& recordBook) const {
@@ -26,8 +32,6 @@ bool Student::matchByRecordBook(const std::string& recordBook) const {
 }
 
 bool Student::matchByName(const std::string& searchName) const {
-    std::string fullNameLower = getFullName();
-    std::string searchLower = searchName;
-    
-    return fullNameLower.find(searchName) != std::string::npos;
+    std::string fullName = getFullName();
+    return fullName.find(searchName) != std::string::npos;
 }
