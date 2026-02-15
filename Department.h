@@ -29,4 +29,4 @@ public:
 
     bool hasTeacher(const std::shared_ptr<Teacher>& teacher) const;
     bool hasGroup(const std::shared_ptr<Group>& group) const;
-};
+}
