@@ -1,5 +1,4 @@
 #include "Task1Exercise.h"
-#include <algorithm>
 
 namespace miit::algebra
 {
@@ -8,15 +7,13 @@ namespace miit::algebra
 
     void Task1Exercise::execute()
     {
-        fill_matrix();
-        
+        matrix.fill_with_generator(*generator);
+
         if (matrix.get_size() >= 2)
         {
             int max_negative = find_max_negative(matrix);
             if (max_negative != 0)
-            {
                 matrix[1] = max_negative;
-            }
         }
     }
 
@@ -24,7 +21,6 @@ namespace miit::algebra
     {
         int max_negative = 0;
         bool found = false;
-        
         for (size_t i = 0; i < arr.get_size(); ++i)
         {
             if (arr[i] < 0)
@@ -36,7 +32,6 @@ namespace miit::algebra
                 }
             }
         }
-        
         return found ? max_negative : 0;
     }
 }
