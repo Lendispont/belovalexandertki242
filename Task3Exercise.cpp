@@ -8,24 +8,17 @@ namespace miit::algebra
 
     void Task3Exercise::execute()
     {
-        fill_matrix();
-        
-        Matrix<int> D = get_matrix();
-        Matrix<int> A(D.get_size());
-        
-        for (size_t i = 0; i < D.get_size(); ++i)
+        matrix.fill_with_generator(*generator);
+
+        Matrix<int> A(matrix.get_size());
+        for (size_t i = 0; i < matrix.get_size(); ++i)
         {
             size_t index = i + 1;
             if (index % 2 == 0)
-            {
-                A[i] = static_cast<int>(std::round(static_cast<double>(D[i] * D[i]) / index));
-            }
+                A[i] = static_cast<int>(std::round(static_cast<double>(matrix[i] * matrix[i]) / index));
             else
-            {
-                A[i] = static_cast<int>(std::round(static_cast<double>(D[i]) / index));
-            }
+                A[i] = static_cast<int>(std::round(static_cast<double>(matrix[i]) / index));
         }
-        
         matrix = std::move(A);
     }
 }
