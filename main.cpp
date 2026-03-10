@@ -9,12 +9,10 @@
 
 using namespace miit::algebra;
 
-// Константы для выбора способа заполнения
 const int RANDOM_CHOICE = 1;
 const int STREAM_CHOICE = 2;
 const int CONSTANT_CHOICE = 3;
 
-// Константы для генераторов
 const int RANDOM_MIN = -10;
 const int RANDOM_MAX = 10;
 const int CONSTANT_VALUE = 5;
@@ -38,7 +36,6 @@ int main()
         int choice;
         std::cin >> choice;
 
-        // Задание 1
         std::cout << "\n=== Задание 1 ===" << std::endl;
         {
             std::unique_ptr<Generator> gen;
@@ -57,7 +54,6 @@ int main()
             }
         }
 
-        // Задание 2
         std::cout << "\n=== Задание 2 ===" << std::endl;
         {
             std::unique_ptr<Generator> gen;
@@ -76,7 +72,6 @@ int main()
             }
         }
 
-        // Задание 3
         std::cout << "\n=== Задание 3 ===" << std::endl;
         {
             std::unique_ptr<Generator> gen;
