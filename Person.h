@@ -1,15 +1,26 @@
 #include <string>
+#include <set>
 
 class Person {
 protected:
+    static int nextId;
+    static std::set<int> existingIds; 
+    
     int id;
     std::string firstName;
     std::string lastName;
     std::string patronymic;
+    
+    static bool isIdUnique(int id);
+    static int generateUniqueId();
 
 public:
+    Person(const std::string& firstName, const std::string& lastName,
+           const std::string& patronymic = "");
+    
     Person(int id, const std::string& firstName, const std::string& lastName,
            const std::string& patronymic = "");
+    
     virtual ~Person() = default;
 
     virtual std::string getInfo() const;
