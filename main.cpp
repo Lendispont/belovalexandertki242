@@ -31,20 +31,23 @@ void demonstrateUniversitySystem() {
     university.addDepartment(mathDept);
     university.addDepartment(physDept);
 
-    auto ivanov = std::make_shared<Teacher>(1, "Иван", "Иванов", "Иванович", csDept);
-    auto petrova = std::make_shared<Teacher>(2, "Мария", "Петрова", "Сергеевна", mathDept);
-    auto sidorov = std::make_shared<Teacher>(3, "Алексей", "Сидоров", "Петрович", physDept);
+    // Преподаватели (ID генерируются автоматически)
+    auto ivanov = std::make_shared<Teacher>("Иван", "Иванов", "Иванович", csDept);
+    auto petrova = std::make_shared<Teacher>("Мария", "Петрова", "Сергеевна", mathDept);
+    auto sidorov = std::make_shared<Teacher>("Алексей", "Сидоров", "Петрович", physDept);
 
     university.addTeacher(ivanov);
     university.addTeacher(petrova);
     university.addTeacher(sidorov);
 
+    // Группы
     auto group101 = std::make_shared<Group>("101-ИВТ", "Информатика и вычислительная техника", csDept);
     auto group102 = std::make_shared<Group>("102-ПМИ", "Прикладная математика и информатика", mathDept);
 
     university.addGroup(group101);
     university.addGroup(group102);
 
+    // Связи преподавателей с группами
     group101->addTeacher(ivanov);
     group101->addTeacher(petrova);
     ivanov->addGroup(group101);
@@ -55,6 +58,7 @@ void demonstrateUniversitySystem() {
     ivanov->addGroup(group102);
     sidorov->addGroup(group102);
 
+    // Связи с кафедрами
     csDept->addTeacher(ivanov);
     mathDept->addTeacher(petrova);
     physDept->addTeacher(sidorov);
@@ -62,13 +66,14 @@ void demonstrateUniversitySystem() {
     csDept->addGroup(group101);
     mathDept->addGroup(group102);
 
-    auto student1 = std::make_shared<Student>(4, "Анна", "Смирнова", "Александровна",
+    // Студенты (ID генерируются автоматически)
+    auto student1 = std::make_shared<Student>("Анна", "Смирнова", "Александровна",
                                                "2023001", group101, "Информатика и вычислительная техника");
-    auto student2 = std::make_shared<Student>(5, "Дмитрий", "Кузнецов", "Викторович",
+    auto student2 = std::make_shared<Student>("Дмитрий", "Кузнецов", "Викторович",
                                                "2023002", group101, "Информатика и вычислительная техника");
-    auto student3 = std::make_shared<Student>(6, "Елена", "Васильева", "Игоревна",
+    auto student3 = std::make_shared<Student>("Елена", "Васильева", "Игоревна",
                                                "2023003", group102, "Прикладная математика и информатика");
-    auto student4 = std::make_shared<Student>(7, "Сергей", "Попов", "Андреевич",
+    auto student4 = std::make_shared<Student>("Сергей", "Попов", "Андреевич",
                                                "2023004", group102, "Прикладная математика и информатика");
 
     university.addStudent(student1);
@@ -90,33 +95,20 @@ void demonstrateUniversitySystem() {
         std::cout << "Тип: " << p->getType() << "\nИнформация: " << p->getInfo() << "\n---\n";
     }
 
-    std::cout << "\n=== ВЫПОЛНЕНИЕ ЗАДАНИЙ ===\n";
+    std::cout << "\n=== ПРОВЕРКА УНИКАЛЬНОСТИ ID ===\n";
+    std::cout << "ID Иванова: " << ivanov->getId() << std::endl;
+    std::cout << "ID Петровой: " << petrova->getId() << std::endl;
+    std::cout << "ID Сидорова: " << sidorov->getId() << std::endl;
+    std::cout << "ID студента 1: " << student1->getId() << std::endl;
+    std::cout << "ID студента 2: " << student2->getId() << std::endl;
 
-    std::cout << "\n1. Поиск по зачетке '2023002':\n";
-    auto found = university.findStudentByRecordBook("2023002");
-    std::cout << (found ? found->getInfo() : "Не найден") << "\n";
-
-    std::cout << "\n2. Поиск по фамилии 'Смирнова':\n";
-    for (const auto& s : university.findStudentsByName("Смирнова"))
-        std::cout << s->getInfo() << "\n";
-
-    std::cout << "\n3. Дисциплины кафедры информатики:\n";
-    for (const auto& c : university.getDepartmentCourses("Кафедра информатики"))
-        std::cout << "- " << c << "\n";
-
-    std::cout << "\n4. Преподаватели группы 101-ИВТ:\n";
-    for (const auto& t : university.getGroupTeachers("101-ИВТ"))
-        std::cout << "- " << t << "\n";
-
-    std::cout << "\n5. Группы специальности 'Информатика и вычислительная техника':\n";
-    for (const auto& g : university.getSpecializationGroups("Информатика и вычислительная техника"))
-        std::cout << "- " << g << "\n";
-
-    std::cout << "\n=== СТАТИСТИКА ===\n";
-    std::cout << "Студентов: " << university.getAllStudents().size() << "\n";
-    std::cout << "Преподавателей: " << university.getAllTeachers().size() << "\n";
-    std::cout << "Кафедр: " << university.getAllDepartments().size() << "\n";
-    std::cout << "Групп: " << university.getAllGroups().size() << "\n";
+    try {
+        std::cout << "\nПытаемся создать человека с ID 1...\n";
+        auto duplicate = std::make_shared<Person>(1, "Тест", "Тестов", "Тестович");
+        std::cout << "Успех: " << duplicate->getInfo() << std::endl;
+    } catch (const std::exception& e) {
+        std::cout << "Ошибка: " << e.what() << std::endl;
+    }
 }
 
 int main() {
