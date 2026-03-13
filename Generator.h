@@ -2,9 +2,6 @@
 
 namespace miit::algebra
 {
-    /**
-     * @brief Абстрактный генератор для заполнения массивов
-     */
     class Generator
     {
     public:
