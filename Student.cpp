@@ -1,6 +1,14 @@
 #include "Student.h"
 #include "Group.h"
 
+Student::Student(const std::string& firstName, const std::string& lastName,
+                 const std::string& patronymic, const std::string& recordBookNumber,
+                 const std::shared_ptr<Group>& group, const std::string& specialization)
+    : Person(firstName, lastName, patronymic), 
+      recordBookNumber(recordBookNumber),
+      group(group),
+      specialization(specialization) {}
+
 Student::Student(int id, const std::string& firstName, const std::string& lastName,
                  const std::string& patronymic, const std::string& recordBookNumber,
                  const std::shared_ptr<Group>& group, const std::string& specialization)
