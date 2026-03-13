@@ -1,12 +1,8 @@
-#pragma once
 #include "Generator.h"
 #include <random>
 
 namespace miit::algebra
 {
-    /**
-     * @brief Генератор случайных чисел
-     */
     class RandomGenerator : public Generator
     {
     private:
