@@ -12,6 +12,9 @@ private:
     std::vector<std::shared_ptr<Group>> groups;
 
 public:
+    Teacher(const std::string& firstName, const std::string& lastName,
+            const std::string& patronymic, const std::shared_ptr<Department>& department);
+    
     Teacher(int id, const std::string& firstName, const std::string& lastName,
             const std::string& patronymic, const std::shared_ptr<Department>& department);
 
