@@ -11,6 +11,10 @@ private:
     std::string specialization;
 
 public:
+    Student(const std::string& firstName, const std::string& lastName,
+            const std::string& patronymic, const std::string& recordBookNumber,
+            const std::shared_ptr<Group>& group, const std::string& specialization);
+    
     Student(int id, const std::string& firstName, const std::string& lastName,
             const std::string& patronymic, const std::string& recordBookNumber,
             const std::shared_ptr<Group>& group, const std::string& specialization);
