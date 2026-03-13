@@ -2,6 +2,10 @@
 #include "Department.h"
 #include "Group.h"
 
+Teacher::Teacher(const std::string& firstName, const std::string& lastName,
+                 const std::string& patronymic, const std::shared_ptr<Department>& department)
+    : Person(firstName, lastName, patronymic), department(department) {}
+
 Teacher::Teacher(int id, const std::string& firstName, const std::string& lastName,
                  const std::string& patronymic, const std::shared_ptr<Department>& department)
     : Person(id, firstName, lastName, patronymic), department(department) {}
