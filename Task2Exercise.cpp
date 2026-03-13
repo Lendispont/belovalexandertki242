@@ -10,7 +10,6 @@ namespace miit::algebra
 
     void Task2Exercise::execute()
     {
-
         matrix.fill_with_generator(*generator);
 
         size_t count_ones = 0;
