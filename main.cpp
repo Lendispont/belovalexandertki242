@@ -17,6 +17,25 @@ const int RANDOM_MIN = -10;
 const int RANDOM_MAX = 10;
 const int CONSTANT_VALUE = 5;
 
+std::unique_ptr<Generator> create_generator(int choice)
+{
+    switch (choice)
+    {
+        case RANDOM_CHOICE:
+            return std::make_unique<RandomGenerator>(RANDOM_MIN, RANDOM_MAX);
+        
+        case STREAM_CHOICE:
+            return std::make_unique<IStreamGenerator>();
+        
+        case CONSTANT_CHOICE:
+            return std::make_unique<ConstantGenerator>(CONSTANT_VALUE);
+        
+        default:
+            std::cout << "Неверный выбор. Используется случайное заполнение по умолчанию." << std::endl;
+            return std::make_unique<RandomGenerator>(RANDOM_MIN, RANDOM_MAX);
+    }
+}
+
 int main()
 {
     try
@@ -36,58 +55,28 @@ int main()
         int choice;
         std::cin >> choice;
 
-        std::cout << "\n=== Задание 1 ===" << std::endl;
+        std::cout << "\n=== Задание 1 (замена второго элемента на максимальный отрицательный) ===" << std::endl;
         {
-            std::unique_ptr<Generator> gen;
-            if (choice == RANDOM_CHOICE)
-                gen = std::make_unique<RandomGenerator>(RANDOM_MIN, RANDOM_MAX);
-            else if (choice == STREAM_CHOICE)
-                gen = std::make_unique<IStreamGenerator>();
-            else if (choice == CONSTANT_CHOICE)
-                gen = std::make_unique<ConstantGenerator>(CONSTANT_VALUE);
-
-            if (gen)
-            {
-                Task1Exercise task1(size, std::move(gen));
-                task1.execute();
-                std::cout << "Результат: " << task1.get_matrix().to_string() << std::endl;
-            }
+            auto gen = create_generator(choice);
+            Task1Exercise task1(size, std::move(gen));
+            task1.execute();
+            std::cout << "Результат: " << task1.get_matrix().to_string() << std::endl;
         }
 
-        std::cout << "\n=== Задание 2 ===" << std::endl;
+        std::cout << "\n=== Задание 2 (вставка K перед элементами с цифрой 1) ===" << std::endl;
         {
-            std::unique_ptr<Generator> gen;
-            if (choice == RANDOM_CHOICE)
-                gen = std::make_unique<RandomGenerator>(RANDOM_MIN, RANDOM_MAX);
-            else if (choice == STREAM_CHOICE)
-                gen = std::make_unique<IStreamGenerator>();
-            else if (choice == CONSTANT_CHOICE)
-                gen = std::make_unique<ConstantGenerator>(CONSTANT_VALUE);
-
-            if (gen)
-            {
-                Task2Exercise task2(size, std::move(gen));
-                task2.execute();
-                std::cout << "Результат: " << task2.get_matrix().to_string() << std::endl;
-            }
+            auto gen = create_generator(choice);
+            Task2Exercise task2(size, std::move(gen));
+            task2.execute();
+            std::cout << "Результат: " << task2.get_matrix().to_string() << std::endl;
         }
 
-        std::cout << "\n=== Задание 3 ===" << std::endl;
+        std::cout << "\n=== Задание 3 (формирование массива A по правилам) ===" << std::endl;
         {
-            std::unique_ptr<Generator> gen;
-            if (choice == RANDOM_CHOICE)
-                gen = std::make_unique<RandomGenerator>(RANDOM_MIN, RANDOM_MAX);
-            else if (choice == STREAM_CHOICE)
-                gen = std::make_unique<IStreamGenerator>();
-            else if (choice == CONSTANT_CHOICE)
-                gen = std::make_unique<ConstantGenerator>(CONSTANT_VALUE);
-
-            if (gen)
-            {
-                Task3Exercise task3(size, std::move(gen));
-                task3.execute();
-                std::cout << "Результат: " << task3.get_matrix().to_string() << std::endl;
-            }
+            auto gen = create_generator(choice);
+            Task3Exercise task3(size, std::move(gen));
+            task3.execute();
+            std::cout << "Результат: " << task3.get_matrix().to_string() << std::endl;
         }
     }
     catch (const std::exception& e)
